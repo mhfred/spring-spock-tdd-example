@@ -1,6 +1,7 @@
 package com.example.controller
 
 import com.example.SpringSpockTddExampleApplication
+import org.hamcrest.Matchers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
@@ -12,6 +13,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 /**
@@ -36,7 +38,10 @@ class MeetingRoomControllerFunctionalSpec extends Specification {
         ResultActions resultActions = mockMvc.perform(get('/meeting_room/1/booking'))
 
         then:
-        resultActions.andExpect(status().isOk())
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath('$.status', Matchers.equalToIgnoringCase("success")))
+                .andExpect(jsonPath('$.status_code').value(1))
     }
 
     @Unroll
@@ -46,10 +51,27 @@ class MeetingRoomControllerFunctionalSpec extends Specification {
         ResultActions resultActions = mockMvc.perform(get(path))
 
         expect:
-        resultActions.andExpect(status().isOk())
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath('$.status', Matchers.equalToIgnoringCase("success")))
+                .andExpect(jsonPath('$.status_code').value(1))
 
         where:
         id << [1, 2, 3, 4, 100]
+    }
+
+    def 'GET /meeting_room/{id}/booking -> response format is correct'() {
+        given: 'assume exists data for id = 1'
+
+        when:
+        ResultActions resultActions = mockMvc.perform(get('/meeting_room/1/booking'))
+
+        then:
+        resultActions
+                .andExpect(jsonPath('$.data').isArray())
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("id")))
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("date")))
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("reserved_slots")))
     }
 
 
