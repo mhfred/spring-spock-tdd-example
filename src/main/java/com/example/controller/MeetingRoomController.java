@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MeetingRoomController {
 
-    @GetMapping("/meeting_room/1/booking")
-    public String getMeetingRoomBooking() {
+    @GetMapping("/meeting_room/{id}/booking")
+    public String getMeetingRoomBooking(@PathVariable("id") Long id) {
         return "to to completed";
     }
 }

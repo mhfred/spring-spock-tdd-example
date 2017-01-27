@@ -40,7 +40,7 @@ class MeetingRoomControllerFunctionalSpec extends Specification {
     }
 
     @Unroll
-    def 'GET /meeting_room/#id/booking -> status is 200'() {
+    'GET /meeting_room/#id/booking -> status is 200'() {
         given:
         def path = "/meeting_room/${id}/booking"
         ResultActions resultActions = mockMvc.perform(get(path))
@@ -51,4 +51,6 @@ class MeetingRoomControllerFunctionalSpec extends Specification {
         where:
         id << [1, 2, 3, 4, 100]
     }
+
+
 }
