@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class MeetingRoomController {
     @GetMapping("/meeting_room/{id}/booking")
     public GenericResponse getMeetingRoomBooking(@PathVariable("id") Long id) {
         GenericResponse<List<ItemBookingInfo>> response = new GenericResponse<>();
-        List<ItemBookingInfo> itemBookingInfoList = Arrays.asList(
+        List<ItemBookingInfo> itemBookingInfoList = Collections.singletonList(
                 ItemBookingInfo.builder()
                         .id(1)
                         .date(Date.from(Instant.now()))

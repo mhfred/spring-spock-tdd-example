@@ -11,19 +11,15 @@ class BookingSpec extends Specification {
     @Subject
     Booking booking
 
-    Bookable a, b, c
+    Bookable meetingRoom, foosball
 
     void setup() {
-        a = BookableImpl.builder()
-                .item(new BookingItem())
+        meetingRoom = BookableImpl.builder()
+                .item(new BookingItem(1, "meeting room"))
                 .calendar(new BookingCalendar())
                 .build()
-        b = BookableImpl.builder()
-                .item(new BookingItem())
-                .calendar(new BookingCalendar())
-                .build()
-        c = BookableImpl.builder()
-                .item(new BookingItem())
+        foosball = BookableImpl.builder()
+                .item(new BookingItem(2, "foosball"))
                 .calendar(new BookingCalendar())
                 .build()
     }
@@ -39,10 +35,10 @@ class BookingSpec extends Specification {
 
     def 'Should contains non null field bookables with list args'() {
         given:
-        booking = new Booking(Arrays.asList(a, b, c))
+        booking = new Booking(Arrays.asList(meetingRoom, foosball))
 
         expect:
-        booking.count() == 3
+        booking.count() == 2
     }
 
     def 'Can add new bookable and return id'() {
@@ -50,35 +46,35 @@ class BookingSpec extends Specification {
         booking = new Booking()
 
         when:
-        def id = booking.add(a)
+        def id = booking.add(meetingRoom)
 
         then:
         booking.count() == 1
-        id == a.id()
+        id == meetingRoom.id()
     }
 
     def 'Can get bookable by id'() {
         given:
-        booking = new Booking(Arrays.asList(a, b, c))
+        booking = new Booking(Arrays.asList(meetingRoom, foosball))
 
         when:
-        def optResult = booking.get(a.id())
+        def optResult = booking.get(meetingRoom.id())
 
         then:
         optResult.isPresent()
-        optResult.get() == a
+        optResult.get() == meetingRoom
     }
 
     def 'Can delete bookable by id'() {
         given:
-        booking = new Booking(Arrays.asList(a, b, c))
+        booking = new Booking(Arrays.asList(meetingRoom, foosball))
 
         when:
-        booking.delete(a.id())
-        def optGetResult = booking.get(a.id())
+        booking.delete(meetingRoom.id())
+        def optGetResult = booking.get(meetingRoom.id())
 
         then:
-        booking.count() == 2
+        booking.count() == 1
         !optGetResult.isPresent()
     }
 }

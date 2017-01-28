@@ -13,7 +13,7 @@ class BookableImplSpec extends Specification {
 
     def 'Should return booking id and name'() {
         given:
-        def item = new BookingItem()
+        def item = new BookingItem(1, "meeting room")
         def calendar = new BookingCalendar()
 
         when:

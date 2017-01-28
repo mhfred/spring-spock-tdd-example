@@ -18,11 +18,11 @@ public class BookableImpl implements Bookable {
 
     @Override
     public Integer id() {
-        return 1;
+        return item.getId();
     }
 
     @Override
     public String name() {
-        return "hello";
+        return item.getName();
     }
 }
