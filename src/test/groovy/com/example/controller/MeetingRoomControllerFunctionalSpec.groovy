@@ -74,5 +74,19 @@ class MeetingRoomControllerFunctionalSpec extends Specification {
                 .andExpect(jsonPath('$.data[0]', Matchers.hasKey("reserved_slots")))
     }
 
+    def 'GET /meeting_room/2/booking -> response format is correct'() {
+        given: ''
+
+        when:
+        ResultActions resultActions = mockMvc.perform(get('/meeting_room/2/booking'))
+
+        then:
+        resultActions
+                .andExpect(jsonPath('$.data').isArray())
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("id")))
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("date")))
+                .andExpect(jsonPath('$.data[0]', Matchers.hasKey("reserved_slots")))
+    }
+
 
 }
