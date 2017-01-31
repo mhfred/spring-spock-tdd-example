@@ -9,7 +9,7 @@ import spock.lang.Subject
  */
 class BookingSpec extends Specification {
     @Subject
-    Booking booking
+    BookableCollection booking
 
     Bookable meetingRoom, foosball
 
@@ -27,7 +27,7 @@ class BookingSpec extends Specification {
 
     def 'Should contains non null field bookables with no args'() {
         given:
-        booking = new Booking()
+        booking = new BookableCollection()
 
         expect:
         booking.count() == 0
@@ -35,7 +35,7 @@ class BookingSpec extends Specification {
 
     def 'Should contains non null field bookables with list args'() {
         given:
-        booking = new Booking(Arrays.asList(meetingRoom, foosball))
+        booking = new BookableCollection(Arrays.asList(meetingRoom, foosball))
 
         expect:
         booking.count() == 2
@@ -43,7 +43,7 @@ class BookingSpec extends Specification {
 
     def 'Can add new bookable and return id'() {
         given:
-        booking = new Booking()
+        booking = new BookableCollection()
 
         when:
         def id = booking.add(meetingRoom)
@@ -55,7 +55,7 @@ class BookingSpec extends Specification {
 
     def 'Can get bookable by id'() {
         given:
-        booking = new Booking(Arrays.asList(meetingRoom, foosball))
+        booking = new BookableCollection(Arrays.asList(meetingRoom, foosball))
 
         when:
         def optResult = booking.get(meetingRoom.id())
@@ -67,7 +67,7 @@ class BookingSpec extends Specification {
 
     def 'Can delete bookable by id'() {
         given:
-        booking = new Booking(Arrays.asList(meetingRoom, foosball))
+        booking = new BookableCollection(Arrays.asList(meetingRoom, foosball))
 
         when:
         booking.delete(meetingRoom.id())

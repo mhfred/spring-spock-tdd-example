@@ -8,7 +8,7 @@ import spock.lang.Subject
 /**
  * Created by deadlock on 28/1/17.
  */
-class BookingItemFactoryTest extends Specification {
+class BookableCollectionItemFactoryTest extends Specification {
     @Subject
     BookingItemFactory bookingItemFactory
 

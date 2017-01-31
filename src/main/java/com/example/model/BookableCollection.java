@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-public class Booking {
+public class BookableCollection {
     private List<Bookable> bookables = new ArrayList<>();
 
     public Integer add(Bookable bookable) {
