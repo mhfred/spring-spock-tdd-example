@@ -9,9 +9,10 @@ class CalendarUtil {
     static Calendar time1300 = create(13, 0)
 
     static Calendar create(int hour, int minute) {
-        def time = Calendar.getInstance()
-        time.set(Calendar.HOUR_OF_DAY, 11)
-        time.set(Calendar.MINUTE, 0)
+        def time = Calendar.getInstance(TimeZone.getDefault())
+        time.set(2017, 1, 31)
+        time.set(Calendar.HOUR_OF_DAY, hour)
+        time.set(Calendar.MINUTE, minute)
         time.set(Calendar.SECOND, 0)
         time.set(Calendar.MILLISECOND, 0)
 

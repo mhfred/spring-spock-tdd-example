@@ -1,10 +1,10 @@
-package com.example.service.dto;
+package com.example.controller.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
 
@@ -15,9 +15,9 @@ import java.util.Calendar;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingRecord {
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "Singapore")
+public class MeetingRoomBookingRequest {
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Calendar begin;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "Singapore")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Calendar end;
 }

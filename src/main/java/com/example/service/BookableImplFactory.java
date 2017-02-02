@@ -24,6 +24,7 @@ public class BookableImplFactory {
                 .map(booingItem ->
                         BookableImpl.builder()
                                 .item(booingItem)
+                                //TODO create calendar by loading data from persist layer
                                 .calendar(new BookingCalendar())
                                 .build()
                 )

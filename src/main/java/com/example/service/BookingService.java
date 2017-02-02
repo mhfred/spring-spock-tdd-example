@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.controller.request.MeetingRoomBookingRequest;
 import com.example.model.Bookable;
 import com.example.model.BookableCollection;
 import com.example.model.ReservationFailedException;
@@ -37,6 +38,10 @@ public class BookingService {
     public void bookMeetingRoom(Calendar begin, Calendar end) throws BookingException, ReservationFailedException {
         Bookable bookable = bookableCollection.get(MEETING_ROOM_ID).orElseThrow(() -> new BookingException("bookable is not found"));
         bookable.book(begin, end);
+    }
+
+    public void bookMeetingRoom(MeetingRoomBookingRequest request) throws BookingException, ReservationFailedException {
+        bookMeetingRoom(request.getBegin(), request.getEnd());
     }
 
     public List<BookingRecord> meetingRoomBookingSummary() throws BookingException {
